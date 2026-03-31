@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useI18n } from "@/lib/i18n";
 
 export default function Footer() {
+  const { dict, locale } = useI18n();
+
   return (
     <footer className="bg-nam-black border-t border-nam-sand/10 py-12 md:py-16 px-6 md:px-10">
       <div className="max-w-6xl mx-auto">
@@ -9,19 +14,19 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-1">
             <Link
               href="/"
-              className="font-serif text-2xl text-nam-white tracking-[0.25em] uppercase hover:opacity-80 transition-opacity duration-300 ink-diffusion"
+              className={`font-serif text-2xl text-nam-white hover:opacity-80 transition-opacity duration-300 ink-diffusion ${locale === "ar" ? "tracking-normal" : "tracking-[0.25em] uppercase"}`}
             >
-              NAM
+              {locale === "ar" ? "نَم" : "NAM"}
             </Link>
             <p className="text-nam-sand/60 text-sm mt-4 font-light">
-              AI voice intelligence for Saudi enterprise.
+              {dict.footer.tagline}
             </p>
           </div>
 
           {/* Product Links */}
           <div>
             <h4 className="text-nam-white font-medium text-sm mb-4 tracking-[0.05em]">
-              PRODUCT
+              {dict.footer.product}
             </h4>
             <ul className="space-y-2">
               <li>
@@ -29,7 +34,7 @@ export default function Footer() {
                   href="/features"
                   className="text-nam-sand/70 hover:text-nam-white text-sm transition-colors"
                 >
-                  Features
+                  {dict.footer.features}
                 </Link>
               </li>
               <li>
@@ -37,7 +42,7 @@ export default function Footer() {
                   href="/pricing"
                   className="text-nam-sand/70 hover:text-nam-white text-sm transition-colors"
                 >
-                  Pricing
+                  {dict.footer.pricing}
                 </Link>
               </li>
               <li>
@@ -45,7 +50,7 @@ export default function Footer() {
                   href="/demo"
                   className="text-nam-sand/70 hover:text-nam-white text-sm transition-colors"
                 >
-                  Demo
+                  {dict.footer.demo}
                 </Link>
               </li>
             </ul>
@@ -54,7 +59,7 @@ export default function Footer() {
           {/* Company Links */}
           <div>
             <h4 className="text-nam-white font-medium text-sm mb-4 tracking-[0.05em]">
-              COMPANY
+              {dict.footer.company}
             </h4>
             <ul className="space-y-2">
               <li>
@@ -62,7 +67,7 @@ export default function Footer() {
                   href="/about"
                   className="text-nam-sand/70 hover:text-nam-white text-sm transition-colors"
                 >
-                  About
+                  {dict.footer.about}
                 </Link>
               </li>
               <li>
@@ -70,7 +75,7 @@ export default function Footer() {
                   href="/contact"
                   className="text-nam-sand/70 hover:text-nam-white text-sm transition-colors"
                 >
-                  Contact
+                  {dict.footer.contact}
                 </Link>
               </li>
               <li>
@@ -78,7 +83,7 @@ export default function Footer() {
                   href="/careers"
                   className="text-nam-sand/70 hover:text-nam-white text-sm transition-colors"
                 >
-                  Careers
+                  {dict.footer.careers}
                 </Link>
               </li>
             </ul>
@@ -87,7 +92,7 @@ export default function Footer() {
           {/* Legal Links */}
           <div>
             <h4 className="text-nam-white font-medium text-sm mb-4 tracking-[0.05em]">
-              LEGAL
+              {dict.footer.legal}
             </h4>
             <ul className="space-y-2">
               <li>
@@ -95,7 +100,7 @@ export default function Footer() {
                   href="/legal"
                   className="text-nam-sand/70 hover:text-nam-white text-sm transition-colors"
                 >
-                  Terms & Privacy
+                  {dict.footer.termsPrivacy}
                 </Link>
               </li>
             </ul>
@@ -105,7 +110,7 @@ export default function Footer() {
         {/* Footer Bottom */}
         <div className="border-t border-nam-sand/10 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-nam-sand/50 text-xs">
-            &copy; 2026 NAM. Built in Saudi Arabia. Designed for the world.
+            {dict.footer.copyright}
           </p>
           <div className="flex gap-6 mt-6 md:mt-0">
             {/* Twitter / X — replace href="#" with real URL when available */}
@@ -113,21 +118,21 @@ export default function Footer() {
               href="#"
               className="text-nam-sand/50 hover:text-nam-white text-sm transition-colors"
             >
-              Twitter
+              {dict.footer.twitter}
             </Link>
             {/* LinkedIn — replace href="#" with real URL when available */}
             <Link
               href="#"
               className="text-nam-sand/50 hover:text-nam-white text-sm transition-colors"
             >
-              LinkedIn
+              {dict.footer.linkedin}
             </Link>
             {/* Instagram — replace href="#" with real URL when available */}
             <Link
               href="#"
               className="text-nam-sand/50 hover:text-nam-white text-sm transition-colors"
             >
-              Instagram
+              {dict.footer.instagram}
             </Link>
           </div>
         </div>

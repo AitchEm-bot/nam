@@ -3,67 +3,67 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Check, ShieldCheck, Lock, Activity } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import Currency from "@/components/Currency";
 
 // ============================================================
 // Flip this to `true` when pricing plans are ready to display.
 // ============================================================
-const PRICING_LIVE = false;
-
-const pilotFeatures = [
-  "10,000 conversational minutes",
-  "2 concurrent voice agents",
-  "5 standard Arabic/English voices",
-  "Standard CRM integration",
-  "Email support (24h SLA)",
-];
-
-const growthFeatures = [
-  "50,000 conversational minutes",
-  "15 concurrent voice agents",
-  "1 Custom Voice Clone (Brand specific)",
-  "Full API access & Webhooks",
-  "Priority support (4h SLA)",
-];
-
-const enterpriseFeatures = [
-  "Unlimited minutes & agents",
-  "On-premise or Private Cloud deployment",
-  "Custom fine-tuned AI models",
-  "Advanced RBAC & SSO integration",
-  "Dedicated Account Manager",
-];
-
-const enterpriseBadges = [
-  {
-    icon: ShieldCheck,
-    title: "Data Sovereignty",
-    description:
-      "100% data residency in Saudi Arabia to comply with local regulations.",
-  },
-  {
-    icon: Lock,
-    title: "End-to-End Encryption",
-    description:
-      "AES-256 encryption at rest and in transit for all voice and text data.",
-  },
-  {
-    icon: Activity,
-    title: "99.99% Uptime SLA",
-    description:
-      "Geographically distributed architecture ensuring maximum availability.",
-  },
-];
+const PRICING_LIVE = true;
 
 const PILOT_MONTHLY = 999;
 const GROWTH_MONTHLY = 3499;
 
 export default function PricingContent() {
   const [isAnnual, setIsAnnual] = useState(true);
+  const { dict } = useI18n();
 
   const pilotPrice = isAnnual ? Math.round(PILOT_MONTHLY * 0.8) : PILOT_MONTHLY;
   const growthPrice = isAnnual
     ? Math.round(GROWTH_MONTHLY * 0.8)
     : GROWTH_MONTHLY;
+
+  const pilotFeatures = [
+    dict.pricing.pilotFeature1,
+    dict.pricing.pilotFeature2,
+    dict.pricing.pilotFeature3,
+    dict.pricing.pilotFeature4,
+    dict.pricing.pilotFeature5,
+  ];
+
+  const growthFeatures = [
+    dict.pricing.growthFeature1,
+    dict.pricing.growthFeature2,
+    dict.pricing.growthFeature3,
+    dict.pricing.growthFeature4,
+    dict.pricing.growthFeature5,
+  ];
+
+  const enterpriseFeatures = [
+    dict.pricing.enterpriseFeature1,
+    dict.pricing.enterpriseFeature2,
+    dict.pricing.enterpriseFeature3,
+    dict.pricing.enterpriseFeature4,
+    dict.pricing.enterpriseFeature5,
+  ];
+
+  const enterpriseBadges = [
+    {
+      icon: ShieldCheck,
+      title: dict.pricing.badge1Title,
+      description: dict.pricing.badge1Desc,
+    },
+    {
+      icon: Lock,
+      title: dict.pricing.badge2Title,
+      description: dict.pricing.badge2Desc,
+    },
+    {
+      icon: Activity,
+      title: dict.pricing.badge3Title,
+      description: dict.pricing.badge3Desc,
+    },
+  ];
 
   if (!PRICING_LIVE) {
     return (
@@ -76,17 +76,16 @@ export default function PricingContent() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-nam-sand/15 bg-nam-sand/5 mb-8">
               <span className="block w-1.5 h-1.5 rounded-full bg-amber-400" />
               <span className="text-xs text-nam-sand/90 tracking-widest uppercase font-medium">
-                Coming Soon
+                {dict.pricing.comingSoonBadge}
               </span>
             </div>
 
             <h1 className="font-serif text-3xl md:text-4xl text-nam-white mb-4 tracking-tight">
-              Pricing is on the way.
+              {dict.pricing.comingSoonHeading}
             </h1>
 
             <p className="text-base text-nam-sand/70 font-light leading-relaxed mb-8">
-              We&apos;re finalizing our enterprise plans. Reach out to our team
-              to discuss custom pricing tailored to your needs.
+              {dict.pricing.comingSoonDesc}
             </p>
 
             <div className="h-px w-full bg-nam-sand/10 mb-8" />
@@ -96,13 +95,13 @@ export default function PricingContent() {
                 href="/contact"
                 className="w-full flex items-center justify-center bg-nam-white text-nam-black px-6 py-3.5 rounded-full text-sm font-medium hover:bg-nam-sand transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(247,245,242,0.1)] hover:shadow-[0_0_30px_rgba(232,227,217,0.2)]"
               >
-                Talk to Us
+                {dict.pricing.comingSoonCta}
               </Link>
               <Link
                 href="/"
                 className="w-full flex items-center justify-center border border-nam-sand/20 text-nam-sand px-6 py-3.5 rounded-full text-sm font-medium hover:bg-nam-white/5 hover:border-nam-sand/40 transition-all duration-300"
               >
-                Return to Home
+                {dict.pricing.returnHome}
               </Link>
             </div>
           </div>
@@ -117,26 +116,25 @@ export default function PricingContent() {
       <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
         <div className="opacity-0 animate-fade-up inline-flex items-center justify-center px-4 py-1.5 mb-6 rounded-full border border-nam-sand/15 bg-nam-black/30 backdrop-blur-md">
           <span className="text-xs md:text-sm text-nam-sand/80 tracking-[0.1em] font-medium">
-            ENTERPRISE PLANS
+            {dict.pricing.badge}
           </span>
         </div>
         <h1
           className="opacity-0 animate-fade-up delay-100 font-serif text-4xl md:text-5xl lg:text-6xl text-nam-white mb-6 tracking-tight"
           style={{ lineHeight: 1.1 }}
         >
-          Intelligence at scale.
+          {dict.pricing.headline}
         </h1>
         <p className="opacity-0 animate-fade-up delay-200 text-lg md:text-xl text-nam-sand/70 font-light max-w-2xl mx-auto">
-          Transparent pricing for voice agents that handle your highest volume
-          workloads with human-level comprehension.
+          {dict.pricing.subheadline}
         </p>
         <p className="opacity-0 animate-fade-up delay-200 mt-4 text-sm text-nam-sand/60">
-          Need a custom solution?{" "}
+          {dict.pricing.customSolution}{" "}
           <Link
             href="/contact"
             className="text-nam-sand hover:text-nam-white underline decoration-nam-sand/30 underline-offset-2 transition-colors"
           >
-            Talk to our team
+            {dict.pricing.talkToTeam}
           </Link>
         </p>
 
@@ -145,7 +143,7 @@ export default function PricingContent() {
           <span
             className={`text-sm font-medium transition-colors duration-300 ${!isAnnual ? "text-nam-white" : "text-nam-sand/60"}`}
           >
-            Monthly
+            {dict.pricing.monthly}
           </span>
           <button
             onClick={() => setIsAnnual(!isAnnual)}
@@ -153,15 +151,15 @@ export default function PricingContent() {
             aria-label="Toggle billing period"
           >
             <span
-              className={`absolute left-1 top-1 w-6 h-6 rounded-full bg-nam-sand transition-transform duration-300 ease-in-out ${isAnnual ? "translate-x-6" : "translate-x-0"}`}
+              className={`absolute start-1 top-1 w-6 h-6 rounded-full bg-nam-sand transition-transform duration-300 ease-in-out ${isAnnual ? "ltr:translate-x-6 rtl:-translate-x-6" : "translate-x-0"}`}
             />
           </button>
           <span
             className={`text-sm font-medium transition-colors duration-300 flex items-center gap-2 ${isAnnual ? "text-nam-white" : "text-nam-sand/60"}`}
           >
-            Annually
+            {dict.pricing.annually}
             <span className="text-[10px] uppercase tracking-wider bg-nam-sand/10 text-nam-sand px-2 py-0.5 rounded-full">
-              Save 20%
+              {dict.pricing.save20}
             </span>
           </span>
         </div>
@@ -172,31 +170,31 @@ export default function PricingContent() {
         {/* Pilot */}
         <div className="opacity-0 animate-fade-up delay-300 glass-card border border-nam-sand/10 rounded-[2rem] p-8 md:p-10 transition-colors hover:border-nam-sand/20 flex flex-col h-full">
           <div className="mb-8">
-            <h3 className="text-2xl font-serif text-nam-white mb-2">Pilot</h3>
+            <h3 className="text-2xl font-serif text-nam-white mb-2">{dict.pricing.pilotName}</h3>
             <p className="text-sm text-nam-sand/60 font-light">
-              Perfect for testing voice AI in a single department.
+              {dict.pricing.pilotDesc}
             </p>
           </div>
           <div className="mb-8">
             <div className="flex items-baseline gap-1">
               <span className="text-5xl font-serif text-nam-white">
-                ${pilotPrice.toLocaleString()}
+                <Currency amount={pilotPrice} />
               </span>
-              <span className="text-nam-sand/50 text-sm">/mo</span>
+              <span className="text-nam-sand/50 text-sm">{dict.pricing.perMonth}</span>
             </div>
             <p className="text-xs text-nam-sand/50 mt-2">
-              {isAnnual ? "Billed annually" : "Billed monthly"}
+              {isAnnual ? dict.pricing.billedAnnually : dict.pricing.billedMonthly}
             </p>
           </div>
           <Link
             href="#signup"
             className="w-full flex items-center justify-center border border-nam-sand/30 text-nam-white px-6 py-3.5 rounded-full text-sm font-medium hover:bg-nam-white/5 transition-all duration-300 mb-10"
           >
-            Start Pilot
+            {dict.pricing.pilotCta}
           </Link>
           <div className="mt-auto">
             <p className="text-xs uppercase tracking-[0.1em] text-nam-sand/40 font-semibold mb-6">
-              What&apos;s included
+              {dict.pricing.pilotIncluded}
             </p>
             <ul className="space-y-4">
               {pilotFeatures.map((feature) => (
@@ -213,37 +211,37 @@ export default function PricingContent() {
         <div className="opacity-0 animate-fade-up delay-400 bg-[#131315] border border-nam-sand/20 rounded-[2rem] p-8 md:p-10 relative lg:-mt-4 shadow-[0_0_40px_rgba(232,227,217,0.03)] flex flex-col h-full">
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <span className="bg-nam-sand text-nam-black text-[10px] uppercase tracking-[0.1em] font-bold px-4 py-1.5 rounded-full">
-              Most Popular
+              {dict.pricing.growthBadge}
             </span>
           </div>
           <div className="mb-8">
             <h3 className="text-2xl font-serif text-nam-white mb-2">
-              Growth
+              {dict.pricing.growthName}
             </h3>
             <p className="text-sm text-nam-sand/60 font-light">
-              For companies ready to automate core customer workflows.
+              {dict.pricing.growthDesc}
             </p>
           </div>
           <div className="mb-8">
             <div className="flex items-baseline gap-1">
               <span className="text-5xl font-serif text-nam-white">
-                ${growthPrice.toLocaleString()}
+                <Currency amount={growthPrice} />
               </span>
-              <span className="text-nam-sand/50 text-sm">/mo</span>
+              <span className="text-nam-sand/50 text-sm">{dict.pricing.perMonth}</span>
             </div>
             <p className="text-xs text-nam-sand/50 mt-2">
-              {isAnnual ? "Billed annually" : "Billed monthly"}
+              {isAnnual ? dict.pricing.billedAnnually : dict.pricing.billedMonthly}
             </p>
           </div>
           <Link
             href="#signup-growth"
             className="w-full flex items-center justify-center bg-nam-white text-nam-black px-6 py-3.5 rounded-full text-sm font-medium hover:bg-nam-sand transition-all duration-300 shadow-[0_0_20px_rgba(247,245,242,0.15)] hover:shadow-[0_0_30px_rgba(232,227,217,0.25)] mb-10"
           >
-            Get Started
+            {dict.pricing.growthCta}
           </Link>
           <div className="mt-auto">
             <p className="text-xs uppercase tracking-[0.1em] text-nam-white/40 font-semibold mb-6">
-              Everything in Pilot, plus:
+              {dict.pricing.growthIncluded}
             </p>
             <ul className="space-y-4">
               {growthFeatures.map((feature) => (
@@ -260,31 +258,31 @@ export default function PricingContent() {
         <div className="opacity-0 animate-fade-up delay-500 glass-card border border-nam-sand/10 rounded-[2rem] p-8 md:p-10 transition-colors hover:border-nam-sand/20 flex flex-col h-full">
           <div className="mb-8">
             <h3 className="text-2xl font-serif text-nam-white mb-2">
-              Enterprise
+              {dict.pricing.enterpriseName}
             </h3>
             <p className="text-sm text-nam-sand/60 font-light">
-              Custom limits, deployment, and security for large institutions.
+              {dict.pricing.enterpriseDesc}
             </p>
           </div>
           <div className="mb-8">
             <div className="flex items-baseline gap-1">
               <span className="text-5xl font-serif text-nam-white">
-                Custom
+                {dict.pricing.enterprisePrice}
               </span>
             </div>
             <p className="text-xs text-nam-sand/50 mt-2">
-              Volume-based pricing
+              {dict.pricing.enterpriseVolume}
             </p>
           </div>
           <Link
             href="/contact"
             className="w-full flex items-center justify-center border border-nam-sand/30 text-nam-white px-6 py-3.5 rounded-full text-sm font-medium hover:bg-nam-white/5 transition-all duration-300 mb-10"
           >
-            Contact Sales
+            {dict.pricing.enterpriseCta}
           </Link>
           <div className="mt-auto">
             <p className="text-xs uppercase tracking-[0.1em] text-nam-sand/40 font-semibold mb-6">
-              Everything in Growth, plus:
+              {dict.pricing.enterpriseIncluded}
             </p>
             <ul className="space-y-4">
               {enterpriseFeatures.map((feature) => (
@@ -303,11 +301,10 @@ export default function PricingContent() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
             <h4 className="text-2xl font-serif text-nam-white mb-4">
-              Enterprise Grade by Default
+              {dict.pricing.enterpriseGradeTitle}
             </h4>
             <p className="text-sm text-nam-sand/60 font-light">
-              Security and reliability engineered for the Saudi financial and
-              government sectors.
+              {dict.pricing.enterpriseGradeDesc}
             </p>
           </div>
           {enterpriseBadges.map((badge) => (

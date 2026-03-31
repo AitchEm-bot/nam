@@ -1,13 +1,17 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Play } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
+import { useI18n } from "@/lib/i18n";
 
 export default function DemoPage() {
+  const { dict, locale } = useI18n();
+  const [videoExpanded, setVideoExpanded] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -15,16 +19,17 @@ export default function DemoPage() {
   return (
     <div className="relative min-h-screen bg-nam-black overflow-hidden font-sans text-nam-white">
       {/* Header */}
-      <div className="relative z-50">
+      <div className={`relative z-50 transition-opacity duration-500 ${videoExpanded ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
         <Header />
       </div>
 
       <ScrollExpandMedia
+        onExpandChange={setVideoExpanded}
         mediaType="video"
-        mediaSrc="/demo-video.mp4"
+        mediaSrc={locale === "ar" ? "/demo-video-ar.mp4" : "/demo-video.mp4"}
         bgImageSrc="/beautiful-scenery-sand-dunes-desert-area-sunny-day.jpg"
-        title="Experience Voice Intelligence"
-        scrollToExpand="Scroll to expand"
+        title={dict.demo.title}
+        scrollToExpand={dict.demo.scrollToExpand}
         textBlend
       >
         <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
@@ -33,25 +38,25 @@ export default function DemoPage() {
               href="/pricing"
               className="inline-flex items-center justify-center border border-nam-sand/30 text-nam-white px-8 py-4 rounded-full text-base font-medium hover:bg-nam-white/5 transition-all duration-300 group"
             >
-              View Pricing
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              {dict.demo.viewPricing}
+              <ArrowRight className="ms-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
             <Link
               href="/contact"
               className="inline-flex items-center justify-center bg-nam-white text-nam-black px-8 py-4 rounded-full text-base font-medium hover:bg-nam-sand transition-all duration-300 transform hover:scale-[1.02] shadow-[0_0_20px_rgba(247,245,242,0.1)] hover:shadow-[0_0_30px_rgba(232,227,217,0.2)]"
             >
-              Talk to Us
+              {dict.demo.talkToUs}
             </Link>
           </div>
 
           <a
-            href="https://www.youtube.com/watch?v=EMmKs8vMKhU"
+            href={dict.demo.youtubeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm text-nam-sand/70 hover:text-nam-white transition-colors group"
           >
             <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            Watch on YouTube
+            {dict.demo.watchOnYouTube}
           </a>
         </div>
       </ScrollExpandMedia>

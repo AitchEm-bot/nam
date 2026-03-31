@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useI18n } from "@/lib/i18n";
 
 // ============================================================
 // Flip this to `true` when the platform is ready for sign-in.
@@ -11,6 +12,8 @@ import Footer from "@/components/Footer";
 const SERVICE_LIVE = false;
 
 export default function SignInPage() {
+  const { dict, locale } = useI18n();
+
   return (
     <div className="relative min-h-screen bg-nam-black overflow-hidden font-sans text-nam-white flex flex-col">
       {/* Background */}
@@ -29,8 +32,8 @@ export default function SignInPage() {
       <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 md:px-6 py-24 w-full max-w-lg mx-auto text-center">
         {/* Logo */}
         <div className="opacity-0 animate-fade-up delay-100 mb-12">
-          <span className="font-serif text-4xl text-nam-white tracking-[0.25em] uppercase ink-diffusion">
-            NAM
+          <span className={`font-serif text-4xl text-nam-white ink-diffusion ${locale === "ar" ? "tracking-normal" : "tracking-[0.25em] uppercase"}`}>
+            {locale === "ar" ? "نَم" : "NAM"}
           </span>
         </div>
 
@@ -43,10 +46,10 @@ export default function SignInPage() {
               /* ===== LIVE SIGN-IN FORM ===== */
               <>
                 <h1 className="font-serif text-3xl md:text-4xl text-nam-white mb-2 tracking-tight">
-                  Welcome back
+                  {dict.signin.welcomeBack}
                 </h1>
                 <p className="text-sm text-nam-sand/60 font-light mb-8">
-                  Sign in to your NAM dashboard.
+                  {dict.signin.signInDashboard}
                 </p>
 
                 <form className="space-y-6 text-left">
@@ -55,14 +58,14 @@ export default function SignInPage() {
                       htmlFor="email"
                       className="block text-xs text-nam-sand/50 uppercase tracking-widest mb-2 font-medium transition-colors group-focus-within:text-nam-sand"
                     >
-                      Email
+                      {dict.signin.email}
                     </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
                       required
-                      placeholder="name@company.com"
+                      placeholder={dict.signin.emailPlaceholder}
                       className="form-input w-full bg-transparent border-b border-nam-sand/20 py-3 text-nam-white placeholder-nam-sand/20 focus:outline-none focus:border-nam-sand focus:ring-0 transition-colors text-base font-light rounded-none"
                     />
                   </div>
@@ -72,14 +75,14 @@ export default function SignInPage() {
                       htmlFor="password"
                       className="block text-xs text-nam-sand/50 uppercase tracking-widest mb-2 font-medium transition-colors group-focus-within:text-nam-sand"
                     >
-                      Password
+                      {dict.signin.password}
                     </label>
                     <input
                       type="password"
                       id="password"
                       name="password"
                       required
-                      placeholder="Enter your password"
+                      placeholder={dict.signin.passwordPlaceholder}
                       className="form-input w-full bg-transparent border-b border-nam-sand/20 py-3 text-nam-white placeholder-nam-sand/20 focus:outline-none focus:border-nam-sand focus:ring-0 transition-colors text-base font-light rounded-none"
                     />
                   </div>
@@ -89,19 +92,19 @@ export default function SignInPage() {
                       type="submit"
                       className="group/btn w-full inline-flex items-center justify-center bg-nam-white text-nam-black px-6 py-4 rounded-full text-base font-medium hover:bg-nam-sand transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(247,245,242,0.1)] hover:shadow-[0_0_30px_rgba(232,227,217,0.2)]"
                     >
-                      <span>Sign In</span>
-                      <ArrowRight className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" />
+                      <span>{dict.signin.signInButton}</span>
+                      <ArrowRight className="ms-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </form>
 
                 <p className="text-center text-xs text-nam-sand/40 mt-6">
-                  Don&apos;t have an account?{" "}
+                  {dict.signin.noAccount}{" "}
                   <Link
                     href="/signup"
                     className="text-nam-sand/70 hover:text-nam-white underline underline-offset-2 decoration-nam-sand/30 transition-colors"
                   >
-                    Request access
+                    {dict.signin.requestAccess}
                   </Link>
                 </p>
               </>
@@ -112,25 +115,22 @@ export default function SignInPage() {
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-nam-sand/15 bg-nam-sand/5 mb-8">
                   <span className="block w-1.5 h-1.5 rounded-full bg-amber-400" />
                   <span className="text-xs text-nam-sand/90 tracking-widest uppercase font-medium">
-                    Coming Soon
+                    {dict.signin.comingSoonBadge}
                   </span>
                 </div>
 
                 <h1 className="font-serif text-3xl md:text-4xl text-nam-white mb-4 tracking-tight">
-                  Something exciting is on the way.
+                  {dict.signin.comingSoonHeading}
                 </h1>
 
                 <p className="text-base text-nam-sand/70 font-light leading-relaxed mb-8">
-                  Our platform is currently being prepared for launch. Sign-in
-                  will be available once we begin onboarding our first enterprise
-                  partners.
+                  {dict.signin.comingSoonDesc}
                 </p>
 
                 <div className="h-px w-full bg-nam-sand/10 mb-8" />
 
                 <p className="text-sm text-nam-sand/50 font-light mb-8">
-                  Interested in early access? Create an account request and our
-                  team will reach out with onboarding details.
+                  {dict.signin.earlyAccess}
                 </p>
 
                 <div className="flex flex-col gap-3">
@@ -138,13 +138,13 @@ export default function SignInPage() {
                     href="/signup"
                     className="w-full flex items-center justify-center bg-nam-white text-nam-black px-6 py-3.5 rounded-full text-sm font-medium hover:bg-nam-sand transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(247,245,242,0.1)] hover:shadow-[0_0_30px_rgba(232,227,217,0.2)]"
                   >
-                    Request Access
+                    {dict.signin.requestAccessCta}
                   </Link>
                   <Link
                     href="/"
                     className="w-full flex items-center justify-center border border-nam-sand/20 text-nam-sand px-6 py-3.5 rounded-full text-sm font-medium hover:bg-nam-white/5 hover:border-nam-sand/40 transition-all duration-300"
                   >
-                    Return to Home
+                    {dict.signin.returnHome}
                   </Link>
                 </div>
               </>

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@emran-alhaddad/saudi-riyal-font/index.css";
 
 :root {
   --nam-black: #0B0B0C;
@@ -42,6 +43,16 @@ body {
   background: var(--nam-black);
   color: var(--nam-white);
   font-family: 'Satoshi', sans-serif;
+}
+
+/* Arabic font overrides when RTL is active */
+[dir="rtl"] {
+  --font-serif: 'Noto Naskh Arabic', 'Gambetta', serif;
+  --font-sans: 'IBM Plex Sans Arabic', 'Satoshi', sans-serif;
+}
+
+[dir="rtl"] body {
+  font-family: 'IBM Plex Sans Arabic', 'Satoshi', sans-serif;
 }
 
 /* Ink diffusion text glow */

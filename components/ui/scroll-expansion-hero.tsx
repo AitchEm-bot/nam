@@ -10,6 +10,7 @@ import {
 } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useI18n } from "@/lib/i18n";
 
 interface ScrollExpandMediaProps {
   mediaType?: "video" | "image";
@@ -21,6 +22,7 @@ interface ScrollExpandMediaProps {
   scrollToExpand?: string;
   textBlend?: boolean;
   children?: ReactNode;
+  onExpandChange?: (expanded: boolean) => void;
 }
 
 const ScrollExpandMedia = ({
@@ -33,6 +35,7 @@ const ScrollExpandMedia = ({
   scrollToExpand,
   textBlend,
   children,
+  onExpandChange,
 }: ScrollExpandMediaProps) => {
   const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [showContent, setShowContent] = useState<boolean>(false);
@@ -40,6 +43,8 @@ const ScrollExpandMedia = ({
   const [touchStartY, setTouchStartY] = useState<number>(0);
   const [isMobileState, setIsMobileState] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(true);
+
+  const { dict, locale } = useI18n();
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -50,6 +55,10 @@ const ScrollExpandMedia = ({
     setMediaFullyExpanded(false);
     setIsMuted(true);
   }, [mediaType]);
+
+  useEffect(() => {
+    onExpandChange?.(mediaFullyExpanded);
+  }, [mediaFullyExpanded, onExpandChange]);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -171,7 +180,9 @@ const ScrollExpandMedia = ({
 
   const mediaWidth = 300 + scrollProgress * (isMobileState ? 650 : 1250);
   const mediaHeight = 400 + scrollProgress * (isMobileState ? 200 : 400);
-  const textTranslateX = scrollProgress * (isMobileState ? 180 : 150);
+  const scrollAmount = scrollProgress * (isMobileState ? 180 : 150);
+  const firstWordX = locale === "ar" ? scrollAmount : -scrollAmount;
+  const restX = locale === "ar" ? -scrollAmount : scrollAmount;
 
   const firstWord = title ? title.split(" ")[0] : "";
   const restOfTitle = title ? title.split(" ").slice(1).join(" ") : "";
@@ -269,19 +280,19 @@ const ScrollExpandMedia = ({
                       {mediaFullyExpanded && (
                         <button
                           onClick={() => setIsMuted((m) => !m)}
-                          className="absolute inset-0 z-20 flex items-end justify-start p-4 cursor-pointer group"
+                          className="absolute inset-0 z-20 flex items-end ltr:justify-start rtl:justify-end p-4 cursor-pointer group"
                           aria-label={isMuted ? "Unmute video" : "Mute video"}
                         >
                           <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-nam-black/60 backdrop-blur-sm text-nam-sand text-xs font-medium opacity-80 group-hover:opacity-100 transition-opacity">
                             {isMuted ? (
                               <>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
-                                Click to unmute
+                                {dict.demo.clickToUnmute}
                               </>
                             ) : (
                               <>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg>
-                                Click to mute
+                                {dict.demo.clickToMute}
                               </>
                             )}
                           </span>
@@ -328,7 +339,7 @@ const ScrollExpandMedia = ({
                   {date && (
                     <p
                       className="text-2xl text-nam-sand/80"
-                      style={{ transform: `translateX(-${textTranslateX}vw)` }}
+                      style={{ transform: `translateX(${firstWordX}vw)` }}
                     >
                       {date}
                     </p>
@@ -336,7 +347,7 @@ const ScrollExpandMedia = ({
                   {scrollToExpand && (
                     <p
                       className="text-nam-sand/70 font-medium text-center"
-                      style={{ transform: `translateX(${textTranslateX}vw)` }}
+                      style={{ transform: `translateX(${restX}vw)` }}
                     >
                       {scrollToExpand}
                     </p>
@@ -353,7 +364,7 @@ const ScrollExpandMedia = ({
                 <motion.h2
                   className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-nam-sand ink-diffusion"
                   style={{
-                    transform: `translateX(-${textTranslateX}vw)`,
+                    transform: `translateX(${firstWordX}vw)`,
                     transitionProperty: "none",
                   }}
                 >
@@ -362,7 +373,7 @@ const ScrollExpandMedia = ({
                 <motion.h2
                   className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-center text-nam-sand ink-diffusion"
                   style={{
-                    transform: `translateX(${textTranslateX}vw)`,
+                    transform: `translateX(${restX}vw)`,
                     transitionProperty: "none",
                   }}
                 >

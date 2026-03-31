@@ -5,9 +5,11 @@ import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useI18n } from "@/lib/i18n";
 
 export default function ContactPage() {
   const router = useRouter();
+  const { dict } = useI18n();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,19 +39,18 @@ export default function ContactPage() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-nam-sand/15 bg-nam-sand/5 backdrop-blur-sm mb-6">
                 <span className="block w-1.5 h-1.5 rounded-full bg-nam-sand" />
                 <span className="text-xs text-nam-sand/90 tracking-widest uppercase font-medium">
-                  Sales & Partnerships
+                  {dict.contact.badge}
                 </span>
               </div>
             </div>
 
             <h1 className="opacity-0 animate-fade-up delay-100 font-serif text-4xl md:text-5xl lg:text-6xl text-nam-white leading-[1.1] mb-6">
-              Let&apos;s build the <br className="hidden lg:block" />
-              <span className="text-nam-sand">future of voice.</span>
+              {dict.contact.headline} <br className="hidden lg:block" />
+              <span className="text-nam-sand">{dict.contact.headlineHighlight}</span>
             </h1>
 
             <p className="opacity-0 animate-fade-up delay-200 text-lg text-nam-sand/70 font-light leading-relaxed mb-8 max-w-md">
-              Whether you&apos;re looking to deploy enterprise voice agents or
-              explore strategic partnerships, our team is ready to assist.
+              {dict.contact.desc}
             </p>
 
             <div className="opacity-0 animate-fade-up delay-300 mb-12">
@@ -57,7 +58,7 @@ export default function ContactPage() {
                 href="/pricing"
                 className="inline-flex items-center gap-2 text-sm text-nam-sand/80 hover:text-nam-white transition-colors group"
               >
-                View pricing plans
+                {dict.contact.viewPricing}
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
@@ -65,19 +66,19 @@ export default function ContactPage() {
             <div className="opacity-0 animate-fade-up delay-300 grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-sm text-nam-sand/50 tracking-wider uppercase font-medium mb-3">
-                  Riyadh HQ
+                  {dict.contact.riyadhHQ}
                 </h3>
                 <p className="text-nam-white font-light text-base leading-relaxed">
-                  KAFD, Tower 4
+                  {dict.contact.address1}
                   <br />
-                  King Fahd Road
+                  {dict.contact.address2}
                   <br />
-                  Riyadh, Saudi Arabia
+                  {dict.contact.address3}
                 </p>
               </div>
               <div>
                 <h3 className="text-sm text-nam-sand/50 tracking-wider uppercase font-medium mb-3">
-                  Direct Inquiries
+                  {dict.contact.directInquiries}
                 </h3>
                 <a
                   href="mailto:enterprise@nam.ai"
@@ -107,14 +108,14 @@ export default function ContactPage() {
                       htmlFor="fullName"
                       className="block text-xs text-nam-sand/50 uppercase tracking-widest mb-2 font-medium transition-colors group-focus-within:text-nam-sand"
                     >
-                      Full Name
+                      {dict.contact.fullName}
                     </label>
                     <input
                       type="text"
                       id="fullName"
                       name="fullName"
                       required
-                      placeholder="Abdulrahman Al-Saud"
+                      placeholder={dict.contact.fullNamePlaceholder}
                       className="form-input w-full bg-transparent border-b border-nam-sand/20 py-3 text-nam-white placeholder-nam-sand/20 focus:outline-none focus:border-nam-sand focus:ring-0 transition-colors text-lg font-light rounded-none"
                     />
                   </div>
@@ -123,14 +124,14 @@ export default function ContactPage() {
                       htmlFor="email"
                       className="block text-xs text-nam-sand/50 uppercase tracking-widest mb-2 font-medium transition-colors group-focus-within:text-nam-sand"
                     >
-                      Work Email
+                      {dict.contact.workEmail}
                     </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
                       required
-                      placeholder="name@company.com"
+                      placeholder={dict.contact.workEmailPlaceholder}
                       className="form-input w-full bg-transparent border-b border-nam-sand/20 py-3 text-nam-white placeholder-nam-sand/20 focus:outline-none focus:border-nam-sand focus:ring-0 transition-colors text-lg font-light rounded-none"
                     />
                   </div>
@@ -141,7 +142,7 @@ export default function ContactPage() {
                     htmlFor="inquiryType"
                     className="block text-xs text-nam-sand/50 uppercase tracking-widest mb-2 font-medium transition-colors group-focus-within:text-nam-sand"
                   >
-                    Inquiry Type
+                    {dict.contact.inquiryType}
                   </label>
                   <div className="relative">
                     <select
@@ -152,12 +153,12 @@ export default function ContactPage() {
                       className="w-full bg-transparent border-b border-nam-sand/20 py-3 text-nam-white appearance-none focus:outline-none focus:border-nam-sand focus:ring-0 transition-colors text-lg font-light cursor-pointer rounded-none"
                     >
                       <option value="" disabled className="text-nam-sand/20">
-                        Select an option...
+                        {dict.contact.selectOption}
                       </option>
-                      <option value="enterprise">Enterprise Sales</option>
-                      <option value="partnership">Strategic Partnership</option>
-                      <option value="press">Press & Media</option>
-                      <option value="other">Other Inquiry</option>
+                      <option value="enterprise">{dict.contact.enterpriseSales}</option>
+                      <option value="partnership">{dict.contact.strategicPartnership}</option>
+                      <option value="press">{dict.contact.pressMedia}</option>
+                      <option value="other">{dict.contact.otherInquiry}</option>
                     </select>
                     <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none text-nam-sand/50">
                       <ChevronDown className="w-5 h-5" />
@@ -170,26 +171,26 @@ export default function ContactPage() {
                     htmlFor="message"
                     className="block text-xs text-nam-sand/50 uppercase tracking-widest mb-2 font-medium transition-colors group-focus-within:text-nam-sand"
                   >
-                    How can we help?
+                    {dict.contact.howCanWeHelp}
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     rows={4}
                     required
-                    placeholder="Tell us about your use case or requirements..."
+                    placeholder={dict.contact.messagePlaceholder}
                     className="form-input w-full bg-transparent border-b border-nam-sand/20 py-3 text-nam-white placeholder-nam-sand/20 focus:outline-none focus:border-nam-sand focus:ring-0 transition-colors text-lg font-light resize-none rounded-none"
                   />
                 </div>
 
                 <div className="pt-4 flex items-center justify-between flex-wrap gap-6">
                   <p className="text-xs text-nam-sand/40 max-w-[280px] leading-relaxed">
-                    By submitting this form, you agree to our{" "}
+                    {dict.contact.privacyText}{" "}
                     <Link
                       href="/legal"
                       className="text-nam-sand/70 hover:text-nam-white underline decoration-nam-sand/30 underline-offset-2 transition-colors"
                     >
-                      Privacy Policy
+                      {dict.contact.privacyLink}
                     </Link>
                     .
                   </p>
@@ -197,8 +198,8 @@ export default function ContactPage() {
                     type="submit"
                     className="group/btn inline-flex items-center justify-center bg-nam-white text-nam-black px-8 py-4 rounded-full text-base font-medium hover:bg-nam-sand transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(247,245,242,0.1)] hover:shadow-[0_0_30px_rgba(232,227,217,0.2)]"
                   >
-                    <span>Submit Inquiry</span>
-                    <ArrowRight className="ml-2 w-4.5 h-4.5 transform group-hover/btn:translate-x-1 transition-transform" />
+                    <span>{dict.contact.submitInquiry}</span>
+                    <ArrowRight className="ms-2 w-4.5 h-4.5 transform group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </form>
