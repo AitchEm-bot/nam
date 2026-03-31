@@ -76,7 +76,7 @@ export default function AboutPage() {
 
         {/* Image Break */}
         <section className="w-full max-w-[1920px] mx-auto px-4 md:px-8 mb-32 md:mb-48 opacity-0 animate-fade-up delay-500">
-          <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl md:rounded-[2.5rem] bg-nam-blue/20 border border-nam-sand/5">
+          <div className="relative aspect-[4/5] sm:aspect-[16/9] md:aspect-[4/3] xl:aspect-[21/9] w-full overflow-hidden rounded-2xl md:rounded-[2.5rem] bg-nam-blue/20 border border-nam-sand/5">
             <img
               src="/beautiful-scenery-sand-dunes-desert-area-sunny-day.jpg"
               alt="Abstract representation of Saudi landscapes"
@@ -84,14 +84,48 @@ export default function AboutPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-nam-black via-nam-black/20 to-transparent" />
 
-            {/* Overlaid Stats */}
-            <div className="absolute bottom-8 md:bottom-16 left-8 md:left-16 right-8 md:right-16 grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-nam-sand/10">
+            {/* Stats: small screens — bottom row */}
+            <div className="absolute bottom-8 left-6 right-6 grid grid-cols-2 gap-6 divide-x divide-nam-sand/10 md:hidden">
               {stats.map((stat, i) => (
                 <div
                   key={stat.label}
-                  className={`${i === 0 ? "pl-0 md:pl-4" : "pl-6 md:pl-10"} ${i >= 2 ? "mt-6 md:mt-0" : ""}`}
+                  className={`${i === 0 ? "pl-0" : "pl-4"} ${i >= 2 ? "mt-4" : ""}`}
                 >
-                  <p className="font-serif text-3xl md:text-5xl text-nam-white mb-2">
+                  <p className="font-serif text-2xl text-nam-white mb-1">
+                    {stat.value}
+                  </p>
+                  <p className="text-[10px] text-nam-sand/60 tracking-wider uppercase font-medium">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Stats: md — 2x2 quadrant grid, centered in each cell */}
+            <div className="absolute inset-0 hidden md:grid grid-cols-2 grid-rows-2 xl:hidden">
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="flex flex-col items-center justify-center text-center"
+                >
+                  <p className="font-serif text-5xl text-nam-white mb-2">
+                    {stat.value}
+                  </p>
+                  <p className="text-sm text-nam-sand/60 tracking-wider uppercase font-medium">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Stats: lg+ — bottom single row */}
+            <div className="absolute bottom-16 left-16 right-16 hidden xl:grid grid-cols-4 gap-8 divide-x divide-nam-sand/10">
+              {stats.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className={`${i === 0 ? "pl-0" : "pl-10"}`}
+                >
+                  <p className="font-serif text-5xl text-nam-white mb-2">
                     {stat.value}
                   </p>
                   <p className="text-sm text-nam-sand/60 tracking-wider uppercase font-medium">
