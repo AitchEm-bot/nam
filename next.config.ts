@@ -1,15 +1,16 @@
 import type { NextConfig } from "next";
 
-const basePath = "/nam";
+const isGHPages = process.env.DEPLOY_TARGET === "gh-pages";
+const basePath = isGHPages ? "/nam" : "";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  basePath,
+  ...(isGHPages && { output: "export" }),
+  ...(basePath && { basePath }),
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
   },
   images: {
-    unoptimized: true,
+    ...(isGHPages && { unoptimized: true }),
     remotePatterns: [
       {
         protocol: "https",
