@@ -26,7 +26,7 @@ export default function DemoPage() {
       <ScrollExpandMedia
         onExpandChange={setVideoExpanded}
         mediaType="video"
-        mediaSrc={locale === "ar" ? "/demo-video-ar.mp4" : "/demo-video.mp4"}
+        mediaSrc={locale === "ar" ? `${process.env.NEXT_PUBLIC_BASE_PATH}/demo-video-ar.mp4` : `${process.env.NEXT_PUBLIC_BASE_PATH}/demo-video.mp4`}
         bgImageSrc="/beautiful-scenery-sand-dunes-desert-area-sunny-day.jpg"
         title={dict.demo.title}
         scrollToExpand={dict.demo.scrollToExpand}

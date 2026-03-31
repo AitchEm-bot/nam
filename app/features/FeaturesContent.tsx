@@ -44,7 +44,7 @@ export default function FeaturesContent() {
       {/* Background Layers */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/beautiful-view-tranquil-desert-clear-sky-captured-morocco.jpg"
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/beautiful-view-tranquil-desert-clear-sky-captured-morocco.jpg`}
           alt="Saudi Desert Dunes"
           className="w-full h-full object-cover object-center animate-slow-zoom origin-center"
         />

@@ -13,7 +13,7 @@ export default function CareersContent() {
       {/* Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <img
-          src="/vertical-shot-patterns-beautiful-sand-dunes-desert.jpg"
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/vertical-shot-patterns-beautiful-sand-dunes-desert.jpg`}
           alt="Saudi Desert Dunes"
           className="w-full h-full object-cover object-center animate-slow-zoom origin-center"
         />

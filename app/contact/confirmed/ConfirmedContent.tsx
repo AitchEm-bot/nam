@@ -32,7 +32,7 @@ export default function ConfirmedContent() {
       {/* Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <img
-          src="/vertical-shot-peaceful-desert-clear-blue-sky-captured-morocco.jpg"
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/vertical-shot-peaceful-desert-clear-blue-sky-captured-morocco.jpg`}
           alt="Saudi Desert Dunes"
           className="w-full h-full object-cover object-center animate-slow-zoom origin-center"
         />

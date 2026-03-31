@@ -72,7 +72,7 @@ export default function AboutContent() {
         <section className="w-full max-w-[1920px] mx-auto px-4 md:px-8 mb-32 md:mb-48 opacity-0 animate-fade-up delay-500">
           <div className="relative aspect-[4/5] sm:aspect-[16/9] md:aspect-[4/3] xl:aspect-[21/9] w-full overflow-hidden rounded-2xl md:rounded-[2.5rem] bg-nam-blue/20 border border-nam-sand/5">
             <img
-              src="/beautiful-scenery-sand-dunes-desert-area-sunny-day.jpg"
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/beautiful-scenery-sand-dunes-desert-area-sunny-day.jpg`}
               alt={dict.about.imageAlt}
               className="absolute inset-0 w-full h-full object-cover object-center opacity-40 mix-blend-luminosity hover:scale-105 hover:opacity-50 transition-all duration-[2s] ease-out"
             />
@@ -202,7 +202,7 @@ export default function AboutContent() {
             <div className="flex flex-col items-center text-center p-8 md:p-10 rounded-2xl border border-nam-sand/10 bg-nam-white/[0.01] backdrop-blur-sm hover:bg-nam-white/[0.03] transition-colors duration-500 group">
               <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-nam-sand/20 mb-6 group-hover:border-nam-sand/40 transition-colors duration-300">
                 <img
-                  src="/hani-photo.jpeg"
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/hani-photo.jpeg`}
                   alt={dict.about.founder1Name}
                   className="w-full h-50 object-cover object-center"
                 />
@@ -222,7 +222,7 @@ export default function AboutContent() {
             <div className="flex flex-col items-center text-center p-8 md:p-10 rounded-2xl border border-nam-sand/10 bg-nam-white/[0.01] backdrop-blur-sm hover:bg-nam-white/[0.03] transition-colors duration-500 group">
               <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-nam-sand/20 mb-6 group-hover:border-nam-sand/40 transition-colors duration-300">
                 <img
-                  src="/ahmed-photo.jpeg"
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/ahmed-photo.jpeg`}
                   alt={dict.about.founder2Name}
                   className="w-full h-full object-cover object-center"
                 />

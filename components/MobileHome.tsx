@@ -171,7 +171,7 @@ export default function MobileHome() {
       >
         <div className="absolute inset-0">
           <img
-            src="/desert-sunset-golden-sand-dunes-clear-sky.jpg"
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/desert-sunset-golden-sand-dunes-clear-sky.jpg`}
             alt=""
             className="w-full h-full object-cover animate-slow-zoom"
           />
@@ -444,12 +444,12 @@ export default function MobileHome() {
           {[
             {
               name: dict.mobileHome.founder1Name,
-              photo: "/hani-photo.jpeg",
+              photo: `${process.env.NEXT_PUBLIC_BASE_PATH}/hani-photo.jpeg`,
               role: dict.mobileHome.founder1Role,
             },
             {
               name: dict.mobileHome.founder2Name,
-              photo: "/ahmed-photo.jpeg",
+              photo: `${process.env.NEXT_PUBLIC_BASE_PATH}/ahmed-photo.jpeg`,
               role: dict.mobileHome.founder2Role,
             },
           ].map((founder, i) => (

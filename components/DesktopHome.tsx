@@ -13,7 +13,7 @@ export default function DesktopHome() {
       {/* Background Image with Slow Zoom */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/desert-sunset-golden-sand-dunes-clear-sky.jpg"
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/desert-sunset-golden-sand-dunes-clear-sky.jpg`}
           alt="Saudi Desert Dunes"
           className="w-full h-full object-cover object-center animate-slow-zoom origin-center"
         />
