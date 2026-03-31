@@ -7,6 +7,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useI18n } from "@/lib/i18n";
 
+// ============================================================
+// Flip this to `true` when sign-up is ready.
+// ============================================================
+const SIGNUP_LIVE = false;
+
 export default function SignUpPage() {
   const router = useRouter();
   const { dict, locale } = useI18n();
@@ -14,6 +19,38 @@ export default function SignUpPage() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     router.push("/signup/confirmed");
+  }
+
+  if (!SIGNUP_LIVE) {
+    return (
+      <div className="relative min-h-screen bg-nam-black overflow-x-hidden font-sans text-nam-white flex flex-col">
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(45,58,90,0.2)_0%,rgba(11,11,12,0)_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(232,227,217,0.04)_0%,rgba(11,11,12,0)_50%)]" />
+          <div className="absolute inset-0 noise-overlay" />
+        </div>
+        <div className="relative z-50"><Header /></div>
+        <main className="relative z-10 pt-32 pb-24 md:pt-40 md:pb-32 px-4 md:px-6 max-w-xl mx-auto flex flex-col items-center text-center flex-1">
+          <div className="opacity-0 animate-fade-up w-full bg-[#111113]/80 backdrop-blur-xl border border-nam-sand/10 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-nam-indigo/10 blur-[80px] rounded-full pointer-events-none" />
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-nam-sand/15 bg-nam-sand/5 mb-8">
+                <span className="block w-1.5 h-1.5 rounded-full bg-amber-400" />
+                <span className="text-xs text-nam-sand/90 tracking-widest uppercase font-medium">{dict.signup.comingSoonBadge}</span>
+              </div>
+              <h1 className="font-serif text-3xl md:text-4xl text-nam-white mb-4 tracking-tight">{dict.signup.comingSoonHeading}</h1>
+              <p className="text-base text-nam-sand/70 font-light leading-relaxed mb-8">{dict.signup.comingSoonDesc}</p>
+              <div className="h-px w-full bg-nam-sand/10 mb-8" />
+              <div className="flex flex-col gap-3">
+                <Link href="/contact" className="w-full flex items-center justify-center bg-nam-white text-nam-black px-6 py-3.5 rounded-full text-sm font-medium hover:bg-nam-sand transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(247,245,242,0.1)] hover:shadow-[0_0_30px_rgba(232,227,217,0.2)]">{dict.signup.comingSoonCta}</Link>
+                <Link href="/" className="w-full flex items-center justify-center border border-nam-sand/20 text-nam-sand px-6 py-3.5 rounded-full text-sm font-medium hover:bg-nam-white/5 hover:border-nam-sand/40 transition-all duration-300">{dict.signup.returnHome}</Link>
+              </div>
+            </div>
+          </div>
+        </main>
+        <div className="relative z-40 mt-auto"><Footer /></div>
+      </div>
+    );
   }
 
   return (

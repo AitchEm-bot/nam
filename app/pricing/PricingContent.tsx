@@ -9,7 +9,7 @@ import Currency from "@/components/Currency";
 // ============================================================
 // Flip this to `true` when pricing plans are ready to display.
 // ============================================================
-const PRICING_LIVE = true;
+const PRICING_LIVE = false;
 
 const PILOT_MONTHLY = 999;
 const GROWTH_MONTHLY = 3499;
