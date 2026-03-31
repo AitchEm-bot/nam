@@ -4,6 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { Check, ShieldCheck, Lock, Activity } from "lucide-react";
 
+// ============================================================
+// Flip this to `true` when pricing plans are ready to display.
+// ============================================================
+const PRICING_LIVE = false;
+
 const pilotFeatures = [
   "10,000 conversational minutes",
   "2 concurrent voice agents",
@@ -60,6 +65,52 @@ export default function PricingContent() {
     ? Math.round(GROWTH_MONTHLY * 0.8)
     : GROWTH_MONTHLY;
 
+  if (!PRICING_LIVE) {
+    return (
+      <main className="relative z-10 pt-32 pb-24 md:pt-40 md:pb-32 px-4 md:px-6 max-w-xl mx-auto flex flex-col items-center text-center">
+        <div className="opacity-0 animate-fade-up w-full bg-[#111113]/80 backdrop-blur-xl border border-nam-sand/10 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-nam-indigo/10 blur-[80px] rounded-full pointer-events-none" />
+
+          <div className="relative z-10">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-nam-sand/15 bg-nam-sand/5 mb-8">
+              <span className="block w-1.5 h-1.5 rounded-full bg-amber-400" />
+              <span className="text-xs text-nam-sand/90 tracking-widest uppercase font-medium">
+                Coming Soon
+              </span>
+            </div>
+
+            <h1 className="font-serif text-3xl md:text-4xl text-nam-white mb-4 tracking-tight">
+              Pricing is on the way.
+            </h1>
+
+            <p className="text-base text-nam-sand/70 font-light leading-relaxed mb-8">
+              We&apos;re finalizing our enterprise plans. Reach out to our team
+              to discuss custom pricing tailored to your needs.
+            </p>
+
+            <div className="h-px w-full bg-nam-sand/10 mb-8" />
+
+            <div className="flex flex-col gap-3">
+              <Link
+                href="/contact"
+                className="w-full flex items-center justify-center bg-nam-white text-nam-black px-6 py-3.5 rounded-full text-sm font-medium hover:bg-nam-sand transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(247,245,242,0.1)] hover:shadow-[0_0_30px_rgba(232,227,217,0.2)]"
+              >
+                Talk to Us
+              </Link>
+              <Link
+                href="/"
+                className="w-full flex items-center justify-center border border-nam-sand/20 text-nam-sand px-6 py-3.5 rounded-full text-sm font-medium hover:bg-nam-white/5 hover:border-nam-sand/40 transition-all duration-300"
+              >
+                Return to Home
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="relative z-10 pt-32 pb-24 md:pt-40 md:pb-32 px-4 md:px-6 max-w-7xl mx-auto">
       {/* Page Header */}
@@ -98,7 +149,7 @@ export default function PricingContent() {
           </span>
           <button
             onClick={() => setIsAnnual(!isAnnual)}
-            className="relative w-14 h-8 rounded-full bg-nam-sand/10 border border-nam-sand/20 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-nam-sand/50"
+            className="relative w-14 h-8 rounded-full bg-nam-sand/10 border border-nam-sand/20 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-nam-sand/50 cursor-pointer"
             aria-label="Toggle billing period"
           >
             <span
